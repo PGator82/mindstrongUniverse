@@ -20,11 +20,29 @@
       position:relative;
     }
 
-    .ms-brandLogo{
-      width:22px;
-      height:22px;
-      margin-right:10px;
-      filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+    .ms-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.ms-brandLogo{
+  width:22px;
+  height:22px;
+  display:inline-block;
+  margin-right:0; /* gap handles spacing */
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+  transition: transform .18s ease, filter .18s ease;
+  transform-origin:center;
+}
+
+.ms-brand:hover .ms-brandLogo{
+  transform: translateY(-1px) scale(1.03);
+  filter:
+    drop-shadow(0 10px 22px rgba(0,0,0,.45))
+    drop-shadow(0 0 10px rgba(34,211,238,.22))
+    drop-shadow(0 0 18px rgba(124,58,237,.18));
+};
     }
 
     .ms-heroFX{
@@ -115,6 +133,24 @@
       <h2>Start Learning</h2>
       <p>Math Foundations • Module 1 • Lessons 1–6</p>
       <div class="ms-actions">
+
+        <div class="ms-progressRow" aria-label="Module 1 progress">
+  <div class="ms-ring" data-total="6" data-key="ms_m1_done" title="Module 1 progress">
+    <svg viewBox="0 0 44 44" class="ms-ringSvg" aria-hidden="true">
+      <circle class="ms-ringTrack" cx="22" cy="22" r="18"></circle>
+      <circle class="ms-ringBar" cx="22" cy="22" r="18"></circle>
+    </svg>
+    <div class="ms-ringText">
+      <b id="m1Done">0</b><span>/6</span>
+    </div>
+  </div>
+
+  <div class="ms-progressMeta">
+    <div class="ms-progressTitle">Module 1 Progress</div>
+    <div class="ms-progressSub" id="m1Label">0 of 6 lessons completed</div>
+  </div>
+</div>
+        
         <a class="ms-btn primary" href="./school/foundations/index.html">Open Course →</a>
         <a id="continueBtn" class="ms-btn" href="./school/index.html">Continue Learning</a>
       </div>

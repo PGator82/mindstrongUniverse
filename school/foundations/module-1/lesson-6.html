@@ -1,65 +1,76 @@
+<!-- =========================
+FILE: lesson-6.html
+PATH: /school/foundations/module-1/lesson-6.html
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lesson 6 | Estimation</title>
+  <title>MindStrong Universe • Foundations • Module 1 • Lesson 6</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../school.css" />
-  <link rel="stylesheet" href="../../../theme.css" />
+  <link rel="stylesheet" href="../../theme.css" />
+
+  <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
+  <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
+  <meta name="theme-color" content="#0b0f1a" />
+
+  <link rel="stylesheet" href="../../lesson-vibe.css" />
 </head>
+
 <body>
-  <header class="ms-nav">
-    <a href="../../../index.html">Home</a>
-    <a href="../../index.html">School</a>
-    <a href="../index.html">Math Foundations</a>
-    <a href="./lesson-6.html"><strong>Lesson 6</strong></a>
+  <header class="ms-top">
+    <div class="ms-nav">
+      <div class="ms-brand">
+        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
+        <span>MindStrong Universe</span>
+      </div>
+      <nav class="ms-links">
+        <a class="ms-link" href="../../../index.html">Home</a>
+        <a class="ms-link" href="../../index.html">School</a>
+        <a class="ms-link" href="../index.html">Foundations</a>
+      </nav>
+    </div>
   </header>
 
   <main class="ms-wrap">
-    <h1>Lesson 6: Estimation as a Superpower</h1>
-    <p><strong>Goal:</strong> Estimate to check answers and solve faster.</p>
+    <section class="ms-card">
+      <div class="ms-kicker">Module 1 • Lesson 6</div>
+      <h1 class="ms-h1" style="margin-top:8px;">Lesson 6 Title</h1>
+      <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
 
-    <h2>Hook</h2>
-    <p>Estimation is how you catch wrong answers instantly. It’s the “smell test” for math.</p>
+      <div class="ms-hr"></div>
+      <p class="ms-muted">Paste Lesson 6 content here.</p>
 
-    <h2>The Hack</h2>
-    <p><strong>Round → Compute → Adjust (if needed)</strong></p>
-    <ul>
-      <li>Round numbers to friendly landmarks.</li>
-      <li>Do quick math.</li>
-      <li>Use it to check if the exact answer makes sense.</li>
-    </ul>
-
-    <h2>Standard Method</h2>
-    <p>Estimation uses rounded values to find an approximate answer. It helps verify reasonableness.</p>
-
-    <h2>Guided Practice</h2>
-    <ol>
-      <li>Estimate: <strong>398 + 602</strong></li>
-      <li>Estimate: <strong>4,901 − 2,098</strong></li>
-      <li>Estimate: <strong>49 × 21</strong></li>
-      <li>A calculator says <strong>1,999 + 502 = 2,401</strong>. Does that seem right? Why?</li>
-    </ol>
-
-    <h2>Boss Problem</h2>
-    <p>You’re buying snacks. Chips cost <strong>$2.49</strong>, a drink costs <strong>$1.89</strong>, and candy costs <strong>$0.99</strong>. Estimate the total without exact adding. Then explain whether <strong>$4.00</strong> is enough.</p>
-
-    <h2>Exit Check</h2>
-    <p>Estimate: <strong>7,950 + 1,020</strong></p>
-    <details><summary>Answer</summary><p><strong>~9,000</strong> (8,000 + 1,000)</p></details>
-
-    <hr class="ms-hr" />
-    <p>
-      <a class="ms-btn" href="./lesson-5.html">← Back</a>
-      &nbsp;
-      <a class="ms-btn" href="../index.html">Module 1 Complete →</a>
-    </p>
+      <div class="ms-hr"></div>
+      <div class="ms-actions">
+        <a class="ms-btn" href="./lesson-5.html">← Prev</a>
+        <a class="ms-btn primary" href="../index.html">Finish Module →</a>
+      </div>
+    </section>
   </main>
 
-  <footer class="ms-footer">© MindStrong Universe</footer>
-
   <script>
-    localStorage.setItem("ms_last_lesson_url", window.location.href);
+    (function(){
+      localStorage.setItem("ms_last_lesson_url", window.location.pathname);
+      const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
+      if (!match) return;
+      const lessonNum = Number(match[1]);
+      if (!Number.isFinite(lessonNum)) return;
+
+      const key = "ms_m1_done";
+      let arr = [];
+      try {
+        arr = JSON.parse(localStorage.getItem(key) || "[]");
+        if (!Array.isArray(arr)) arr = [];
+      } catch { arr = []; }
+
+      if (!arr.includes(lessonNum)) {
+        arr.push(lessonNum);
+        localStorage.setItem(key, JSON.stringify(arr));
+      }
+    })();
   </script>
+
+  <script src="../../lesson-vibe.js"></script>
 </body>
 </html>

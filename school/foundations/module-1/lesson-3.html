@@ -1,63 +1,77 @@
+<!-- =========================
+FILE: lesson-3.html
+PATH: /school/foundations/module-1/lesson-3.html
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lesson 3 | Expanded Form</title>
+  <title>MindStrong Universe • Foundations • Module 1 • Lesson 3</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../../css/style.css" />
-  <link rel="stylesheet" href="../../school.css" />
-  <link rel="stylesheet" href="../../../theme.css" />
+  <link rel="stylesheet" href="../../theme.css" />
+
+  <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
+  <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
+  <meta name="theme-color" content="#0b0f1a" />
+
+  <link rel="stylesheet" href="../../lesson-vibe.css" />
 </head>
+
 <body>
-  <script>
-  localStorage.setItem("ms_last_lesson_url", window.location.href);
-</script>
-  <header style="padding:16px;">
-    <nav style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../../../index.html">Home</a>
-      <a href="../../index.html">School</a>
-      <a href="../index.html">Math Foundations</a>
-      <a href="./lesson-3.html"><strong>Lesson 3</strong></a>
-    </nav>
+  <header class="ms-top">
+    <div class="ms-nav">
+      <div class="ms-brand">
+        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
+        <span>MindStrong Universe</span>
+      </div>
+      <nav class="ms-links">
+        <a class="ms-link" href="../../../index.html">Home</a>
+        <a class="ms-link" href="../../index.html">School</a>
+        <a class="ms-link" href="../index.html">Foundations</a>
+      </nav>
+    </div>
   </header>
 
-  <main style="max-width: 980px; margin: 0 auto; padding: 24px;">
-    <h1>Lesson 3: Expanded Form — Breaking Numbers Apart</h1>
-    <p><strong>Goal:</strong> Break numbers into place-value pieces to understand structure.</p>
+  <main class="ms-wrap">
+    <section class="ms-card">
+      <div class="ms-kicker">Module 1 • Lesson 3</div>
+      <h1 class="ms-h1" style="margin-top:8px;">Lesson 3 Title</h1>
+      <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
 
-    <h2>Hook</h2>
-    <p>Numbers aren’t single things. They’re built from parts. Break them apart = control them.</p>
+      <div class="ms-hr"></div>
+      <p class="ms-muted">Paste Lesson 3 content here.</p>
 
-    <h2>The Hack</h2>
-    <p>Expanded form is <strong>number LEGO</strong>.</p>
-    <p><strong>3,402 = 3,000 + 400 + 2</strong></p>
-
-    <h2>Standard Method</h2>
-    <p>Expanded form shows each digit’s value as a sum of its place values.</p>
-
-    <h2>Guided Practice</h2>
-    <ol>
-      <li>Write <strong>5,216</strong> in expanded form.</li>
-      <li>Write <strong>902</strong> in expanded form.</li>
-      <li>Which part of <strong>7,430</strong> is missing (think thousands/hundreds/tens/ones)?</li>
-    </ol>
-
-    <h2>Boss Problem</h2>
-    <p>A student writes: <strong>4,080 = 4,8</strong>. Explain why this is wrong using expanded form.</p>
-
-    <h2>Exit Check</h2>
-    <p>Write <strong>1,205</strong> in expanded form.</p>
-    <details><summary>Answer</summary><p><strong>1,000 + 200 + 5</strong></p></details>
-
-    <hr style="margin:24px 0;">
-   <p>
-      <a href="./lesson-2.html">← Back</a> &nbsp; | &nbsp;
-      <a href="./lesson-4.html">Next lesson →</a>
-    </p>
+      <div class="ms-hr"></div>
+      <div class="ms-actions">
+        <a class="ms-btn" href="./lesson-2.html">← Prev</a>
+        <a class="ms-btn" href="../index.html">Module</a>
+        <a class="ms-btn primary" href="./lesson-4.html">Next →</a>
+      </div>
+    </section>
   </main>
 
-  <footer style="padding:24px; text-align:center; opacity:.7;">
-    © MindStrong Universe
-  </footer>
+  <script>
+    (function(){
+      localStorage.setItem("ms_last_lesson_url", window.location.pathname);
+      const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
+      if (!match) return;
+      const lessonNum = Number(match[1]);
+      if (!Number.isFinite(lessonNum)) return;
+
+      const key = "ms_m1_done";
+      let arr = [];
+      try {
+        arr = JSON.parse(localStorage.getItem(key) || "[]");
+        if (!Array.isArray(arr)) arr = [];
+      } catch { arr = []; }
+
+      if (!arr.includes(lessonNum)) {
+        arr.push(lessonNum);
+        localStorage.setItem(key, JSON.stringify(arr));
+      }
+    })();
+  </script>
+
+  <script src="../../lesson-vibe.js"></script>
 </body>
 </html>

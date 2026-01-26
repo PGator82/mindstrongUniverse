@@ -1,66 +1,77 @@
+<!-- =========================
+FILE: lesson-5.html
+PATH: /school/foundations/module-1/lesson-5.html
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lesson 5 | Rounding</title>
+  <title>MindStrong Universe • Foundations • Module 1 • Lesson 5</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../school.css" />
-  <link rel="stylesheet" href="../../../theme.css" />
+  <link rel="stylesheet" href="../../theme.css" />
+
+  <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
+  <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
+  <meta name="theme-color" content="#0b0f1a" />
+
+  <link rel="stylesheet" href="../../lesson-vibe.css" />
 </head>
+
 <body>
-  <header class="ms-nav">
-    <a href="../../../index.html">Home</a>
-    <a href="../../index.html">School</a>
-    <a href="../index.html">Math Foundations</a>
-    <a href="./lesson-5.html"><strong>Lesson 5</strong></a>
+  <header class="ms-top">
+    <div class="ms-nav">
+      <div class="ms-brand">
+        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
+        <span>MindStrong Universe</span>
+      </div>
+      <nav class="ms-links">
+        <a class="ms-link" href="../../../index.html">Home</a>
+        <a class="ms-link" href="../../index.html">School</a>
+        <a class="ms-link" href="../index.html">Foundations</a>
+      </nav>
+    </div>
   </header>
 
   <main class="ms-wrap">
-    <h1>Lesson 5: Rounding Without Memorizing Rules</h1>
-    <p><strong>Goal:</strong> Round numbers using landmarks (not “5 or more…” panic).</p>
+    <section class="ms-card">
+      <div class="ms-kicker">Module 1 • Lesson 5</div>
+      <h1 class="ms-h1" style="margin-top:8px;">Lesson 5 Title</h1>
+      <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
 
-    <h2>Hook</h2>
-    <p>Rounding is choosing the nearest “landmark.” You’re not following a chant — you’re choosing the closest target.</p>
+      <div class="ms-hr"></div>
+      <p class="ms-muted">Paste Lesson 5 content here.</p>
 
-    <h2>The Hack</h2>
-    <p><strong>Landmark method:</strong></p>
-    <ol>
-      <li>Circle the place you’re rounding to (the landmark place).</li>
-      <li>Look one digit to the right (the decider).</li>
-      <li>Decider 0–4 → stay. Decider 5–9 → bump up.</li>
-      <li>Everything to the right becomes zeros.</li>
-    </ol>
-
-    <h2>Standard Method</h2>
-    <p>To round to a place value, check the digit to the right. If it is 5 or greater, increase the rounding digit by 1; otherwise keep it the same.</p>
-
-    <h2>Guided Practice</h2>
-    <ol>
-      <li>Round <strong>4,783</strong> to the nearest hundred.</li>
-      <li>Round <strong>9,949</strong> to the nearest thousand.</li>
-      <li>Round <strong>1,250</strong> to the nearest hundred.</li>
-      <li>Round <strong>506</strong> to the nearest ten.</li>
-    </ol>
-
-    <h2>Boss Problem</h2>
-    <p>Two students round <strong>3,450</strong> to the nearest hundred and get different answers. One says <strong>3,400</strong>. One says <strong>3,500</strong>. Who is right? Explain.</p>
-
-    <h2>Exit Check</h2>
-    <p>Round <strong>6,501</strong> to the nearest thousand.</p>
-    <details><summary>Answer</summary><p><strong>7,000</strong> (decider is 5)</p></details>
-
-    <hr class="ms-hr" />
-    <p>
-      <a class="ms-btn" href="./lesson-4.html">← Back</a>
-      &nbsp;
-      <a class="ms-btn" href="./lesson-6.html">Next →</a>
-    </p>
+      <div class="ms-hr"></div>
+      <div class="ms-actions">
+        <a class="ms-btn" href="./lesson-4.html">← Prev</a>
+        <a class="ms-btn" href="../index.html">Module</a>
+        <a class="ms-btn primary" href="./lesson-6.html">Next →</a>
+      </div>
+    </section>
   </main>
 
-  <footer class="ms-footer">© MindStrong Universe</footer>
-
   <script>
-    localStorage.setItem("ms_last_lesson_url", window.location.href);
+    (function(){
+      localStorage.setItem("ms_last_lesson_url", window.location.pathname);
+      const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
+      if (!match) return;
+      const lessonNum = Number(match[1]);
+      if (!Number.isFinite(lessonNum)) return;
+
+      const key = "ms_m1_done";
+      let arr = [];
+      try {
+        arr = JSON.parse(localStorage.getItem(key) || "[]");
+        if (!Array.isArray(arr)) arr = [];
+      } catch { arr = []; }
+
+      if (!arr.includes(lessonNum)) {
+        arr.push(lessonNum);
+        localStorage.setItem(key, JSON.stringify(arr));
+      }
+    })();
   </script>
+
+  <script src="../../lesson-vibe.js"></script>
 </body>
 </html>

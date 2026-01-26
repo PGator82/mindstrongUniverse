@@ -12,6 +12,62 @@
   <meta name="theme-color" content="#0b0f1a" />
 
   <style>
+
+    .ms-progressRow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:12px;
+  padding:10px 12px;
+  border:1px solid var(--stroke);
+  border-radius: calc(var(--r) + 2px);
+  background: rgba(255,255,255,.03);
+}
+
+.ms-ring{
+  width:44px;
+  height:44px;
+  position:relative;
+  flex:0 0 auto;
+}
+
+.ms-ringSvg{
+  width:44px;
+  height:44px;
+  transform: rotate(-90deg);
+}
+
+.ms-ringTrack{
+  fill:none;
+  stroke: rgba(255,255,255,.12);
+  stroke-width:4;
+}
+
+.ms-ringBar{
+  fill:none;
+  stroke: rgba(34,211,238,.55);
+  stroke-width:4;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097; /* 2πr where r=18 */
+  stroke-dashoffset: 113.097;
+  transition: stroke-dashoffset .6s ease;
+  filter: drop-shadow(0 0 10px rgba(34,211,238,.15));
+}
+
+.ms-ringText{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  gap:2px;
+}
+.ms-ringText b{ font-size:13px; }
+.ms-ringText span{ color:var(--muted); }
+
+.ms-progressTitle{ font-weight:800; font-size:13px; }
+.ms-progressSub{ color:var(--muted); font-size:12px; margin-top:2px; }
     .ms-heroGrid{
       display:grid;
       grid-template-columns: 7fr 5fr;
@@ -148,13 +204,45 @@
   <div class="ms-progressMeta">
     <div class="ms-progressTitle">Module 1 Progress</div>
     <div class="ms-progressSub" id="m1Label">0 of 6 lessons completed</div>
+    
   </div>
+          
 </div>
         
         <a class="ms-btn primary" href="./school/foundations/index.html">Open Course →</a>
         <a id="continueBtn" class="ms-btn" href="./school/index.html">Continue Learning</a>
       </div>
+      
     </section>
+    // Module 1 progress ring (expects ms_m1_done to be a JSON array of completed lesson numbers)
+(function initProgressRing(){
+  const ring = document.querySelector('.ms-ring[data-key="ms_m1_done"]');
+  if (!ring) return;
+
+  const total = Number(ring.dataset.total || 6);
+  const key = ring.dataset.key;
+
+  let doneArr = [];
+  try {
+    const raw = localStorage.getItem(key);
+    doneArr = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(doneArr)) doneArr = [];
+  } catch { doneArr = []; }
+
+  const done = Math.max(0, Math.min(total, new Set(doneArr).size));
+  const m1Done = document.getElementById("m1Done");
+  const m1Label = document.getElementById("m1Label");
+  if (m1Done) m1Done.textContent = String(done);
+  if (m1Label) m1Label.textContent = `${done} of ${total} lessons completed`;
+
+  const bar = ring.querySelector(".ms-ringBar");
+  if (bar) {
+    const C = 2 * Math.PI * 18; // r=18
+    const pct = total ? (done / total) : 0;
+    bar.style.strokeDasharray = `${C}`;
+    bar.style.strokeDashoffset = `${C * (1 - pct)}`;
+  }
+})();
 
     <aside class="ms-card ms-holoStage">
       <img src="./Mindstrong.svg" class="ms-holoSeal" alt="MindStrong Crest" />

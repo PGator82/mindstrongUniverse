@@ -278,6 +278,30 @@
         const x = (e.clientX - r.left) / r.width - 0.5;
         const y = (e.clientY - r.top) / r.height - 0.5;
 
+        // Rotate holo images every 3.5s (uses files that exist in repo root)
+const holoPool = [
+  "./playground-image-S7XSr.png",
+  "./playground-image-SPhEr.png",
+  "./playground-image-foiEG.png",
+  "./playground-image-CwQig.png",
+  "./playground-image-d7AoO.png",
+];
+
+const imgA = document.querySelector(".ms-imgA");
+const imgB = document.querySelector(".ms-imgB");
+const imgC = document.querySelector(".ms-imgC");
+
+if (imgA && imgB && imgC) {
+  let i = 0;
+  setInterval(() => {
+    // simple shuffle-ish rotation
+    imgA.src = holoPool[(i + 0) % holoPool.length];
+    imgB.src = holoPool[(i + 1) % holoPool.length];
+    imgC.src = holoPool[(i + 2) % holoPool.length];
+    i = (i + 1) % holoPool.length;
+  }, 3500);
+}
+
         // Gentle tilt + float offsets per layer
         cards.forEach((img, i) => {
           const depth = (i + 1) * 6;

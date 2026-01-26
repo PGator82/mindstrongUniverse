@@ -4,15 +4,105 @@
   <meta charset="UTF-8" />
   <title>MindStrong Universe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Unified theme (same as School + Lessons) -->
   <link rel="stylesheet" href="./theme.css" />
 
   <style>
-    /* Landing-only extras (kept tiny, still using theme tokens) */
+    /* Landing-only extras (still using theme tokens) */
     .ms-heroGrid{
       display:grid; grid-template-columns: 7fr 5fr; gap:14px; align-items:stretch;
       margin-top:18px;
+      position: relative;
     }
+
+    /* Spell-tech background */
+    .ms-heroFX{
+      position:absolute; inset:-24px -8px auto -8px;
+      height: 280px;
+      pointer-events:none;
+      border-radius: 22px;
+      background:
+        radial-gradient(1200px 380px at 25% 20%, rgba(124,58,237,.26), transparent 60%),
+        radial-gradient(900px 300px at 80% 10%, rgba(34,211,238,.18), transparent 55%),
+        radial-gradient(700px 340px at 60% 60%, rgba(16,185,129,.10), transparent 60%);
+      filter: blur(0px);
+      opacity:.95;
+    }
+
+    /* Right-side “Hogwarts x Web3” holo collage */
+    .ms-holoStage{
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ms-holoBg{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(500px 220px at 10% 20%, rgba(255,255,255,.10), transparent 60%),
+        radial-gradient(380px 200px at 90% 10%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+      opacity: .9;
+      pointer-events:none;
+    }
+
+    .ms-holoSeal{
+      width: 100%;
+      max-width: 190px;
+      display:block;
+      margin: 4px auto 10px;
+      opacity: .9;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.35));
+    }
+
+    .ms-holoCards{
+      position: relative;
+      height: 320px;
+      border: 1px solid var(--stroke);
+      border-radius: calc(var(--r) + 6px);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .ms-holoScan{
+      position:absolute; inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,.14), transparent);
+      transform: rotate(14deg);
+      animation: scan 5.8s linear infinite;
+      opacity: .8;
+      pointer-events:none;
+    }
+    @keyframes scan{
+      0%{ transform: translateX(-30%) rotate(14deg); }
+      100%{ transform: translateX(30%) rotate(14deg); }
+    }
+
+    .ms-cardImg{
+      position:absolute;
+      width: 68%;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.2);
+      box-shadow: 0 18px 60px rgba(0,0,0,.42);
+      transform: translate3d(0,0,0) rotate(0deg);
+      transition: transform .14s ease;
+      user-select:none;
+      pointer-events:none;
+      opacity:.95;
+    }
+
+    .ms-imgA{ top: 18px; left: 14px; width: 72%; }
+    .ms-imgB{ top: 96px; right: 10px; width: 70%; opacity:.92; }
+    .ms-imgC{ bottom: 14px; left: 24px; width: 64%; opacity:.90; }
+
+    .ms-holoCaption{
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      text-align:center;
+    }
+
+    /* Small enhancements reused */
     .ms-metric{display:flex; flex-direction:column; gap:2px}
     .ms-metric b{font-size:22px}
     .ms-metric span{color:var(--muted); font-size:12px}
@@ -41,15 +131,16 @@
       padding:18px;
       box-shadow: var(--shadow);
     }
+
     @media (max-width: 860px){
       .ms-heroGrid{grid-template-columns:1fr}
       .ms-steps{grid-template-columns:1fr}
+      .ms-holoCards{height: 280px;}
     }
   </style>
 </head>
 
 <body>
-  <!-- Top Nav -->
   <header class="ms-top">
     <div class="ms-nav">
       <div class="ms-brand">
@@ -59,25 +150,26 @@
       <nav class="ms-links">
         <a class="ms-link is-active" href="./index.html">Home</a>
         <a class="ms-link" href="./school/index.html">School</a>
-        <!-- You can add About/Contact later -->
       </nav>
     </div>
   </header>
 
   <main class="ms-wrap">
-    <!-- HERO -->
     <section class="ms-hero">
-      <span class="ms-kicker">🧠 <b>Online School</b> • Middle School Math • Built for confidence</span>
+      <span class="ms-kicker">🧠 <b>Math Hacks Online School</b> • Middle School • Built for confidence</span>
       <h1 class="ms-h1">Math that feels like a superpower.</h1>
       <p class="ms-sub">
         MindStrong Universe turns confusing skills into simple moves: short lessons, clean practice,
-        and “Math Hacks” that actually stick. Start with Foundations. Upgrade to accounts + progress sync later.
+        and “Math Hacks” that actually stick.
       </p>
 
       <div class="ms-heroGrid">
+        <div class="ms-heroFX"></div>
+
         <section class="ms-card">
           <h2>Start Learning Now</h2>
-          <p>Jump into Math Foundations → Module 1 is live (Lessons 1–6).</p>
+          <p>Math Foundations is live: Module 1 (Lessons 1–6).</p>
+
           <div class="ms-actions">
             <a class="ms-btn primary" href="./school/foundations/index.html">Open Math Foundations →</a>
             <a id="continueBtn" class="ms-btn" href="./school/index.html">Continue Learning</a>
@@ -87,124 +179,81 @@
 
           <div class="ms-grid" style="margin-top:0;">
             <div class="ms-miniCard">
-              <h3>Built for students</h3>
-              <p>No fluff. Every lesson has a hook, a hack, and practice.</p>
+              <h3>Spellbook logic (but real)</h3>
+              <p>Every lesson = hook → hack → practice → exit check.</p>
             </div>
             <div class="ms-miniCard">
-              <h3>Built for teachers/parents</h3>
-              <p>Standard methods included so it’s classroom-safe.</p>
+              <h3>Built to upgrade later</h3>
+              <p>Same URLs now; Supabase accounts + progress sync later.</p>
             </div>
           </div>
 
-          <p class="ms-note">Continue Learning uses localStorage for now (Supabase sync later).</p>
+          <p class="ms-note">Continue Learning uses localStorage on this device for now.</p>
         </section>
 
-        <aside class="ms-card">
-          <h2>Quick Proof</h2>
-          <p class="ms-muted">A landing page should show “what you get” fast.</p>
+        <aside class="ms-card ms-holoStage" id="holoStage">
+          <div class="ms-holoBg"></div>
 
-          <div class="ms-stack" style="margin-top:12px;">
-            <div class="ms-item">
-              <div class="left">
-                <div class="title">Module 1 Live</div>
-                <div class="meta">Number sense & place value</div>
-              </div>
-              <span class="ms-pill">6 Lessons</span>
-            </div>
+          <!-- “Web3 meets Hogwarts” crest -->
+          <img class="ms-holoSeal" src="./Mindstrong.svg" alt="MindStrong Crest" />
 
-            <div class="ms-item">
-              <div class="left">
-                <div class="title">Micro-lessons</div>
-                <div class="meta">Built for attention spans</div>
-              </div>
-              <span class="ms-pill">Fast</span>
-            </div>
+          <div class="ms-holoCards" id="holoCards">
+            <div class="ms-holoScan"></div>
 
-            <div class="ms-item">
-              <div class="left">
-                <div class="title">Tech-ready</div>
-                <div class="meta">Same URLs when you add Supabase</div>
-              </div>
-              <span class="ms-pill">Future-proof</span>
-            </div>
+            <!-- Use your existing repo images here -->
+            <img class="ms-cardImg ms-imgA" src="./playground-image-S7XSr.png" alt="Holo card A" />
+            <img class="ms-cardImg ms-imgB" src="./playground-image-SPhEr.png" alt="Holo card B" />
+            <img class="ms-cardImg ms-imgC" src="./playground-image-foiEG.png" alt="Holo card C" />
           </div>
 
-          <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:14px;">
-            <div class="ms-miniCard ms-metric"><b>6</b><span>Live lessons</span></div>
-            <div class="ms-miniCard ms-metric"><b>1</b><span>Course live</span></div>
-            <div class="ms-miniCard ms-metric"><b>∞</b><span>Hacks coming</span></div>
-          </div>
+          <div class="ms-holoCaption">Arcane UI. Clean learning. No wallet required.</div>
         </aside>
       </div>
     </section>
 
-    <!-- FEATURES -->
     <h2 class="ms-sectionTitle">What makes MindStrong different</h2>
     <div class="ms-grid">
       <section class="ms-card">
         <h2>Hacks + Standards (both)</h2>
-        <p>Students get the shortcut. Teachers get the “show your work.” Everybody wins.</p>
+        <p>Students get the shortcut. Teachers get the “show your work.”</p>
       </section>
       <section class="ms-card">
-        <h2>Short lessons that finish</h2>
+        <h2>Micro-lessons that finish</h2>
         <p>Momentum beats motivation. We build completion into the structure.</p>
       </section>
       <section class="ms-card">
         <h2>Interactive by design</h2>
-        <p>Continue Learning, progress memory, and later: accounts, streaks, quizzes.</p>
+        <p>Continue Learning now; later: streaks, quizzes, accounts, community.</p>
       </section>
       <section class="ms-card">
-        <h2>Web3 vibe, not web3 confusion</h2>
-        <p>Clean, modern, “tech” feel—without forcing wallets or buzzwords.</p>
+        <h2>Tech feel, human goal</h2>
+        <p>Modern aesthetic so students take it seriously—and actually use it.</p>
       </section>
     </div>
 
-    <!-- HOW IT WORKS -->
     <h2 class="ms-sectionTitle">How it works</h2>
     <div class="ms-steps">
       <section class="ms-card">
         <h2><span class="ms-stepNum">1</span>Start Foundations</h2>
-        <p>Fix number sense first. That’s the root of 80% of “I hate math.”</p>
+        <p>Fix number sense first. That’s the root of most frustration.</p>
       </section>
       <section class="ms-card">
         <h2><span class="ms-stepNum">2</span>Learn the hack</h2>
-        <p>Get the mental model + the standard method so it sticks in any class.</p>
+        <p>Mental model + standard method. Works in any classroom.</p>
       </section>
       <section class="ms-card">
         <h2><span class="ms-stepNum">3</span>Practice clean</h2>
-        <p>Guided practice → boss problem → exit check. No random worksheets.</p>
+        <p>Guided practice → boss problem → exit check.</p>
       </section>
     </div>
 
-    <!-- COURSES -->
-    <h2 class="ms-sectionTitle">Courses</h2>
-    <div class="ms-grid">
-      <section class="ms-card">
-        <h2>Math Foundations <span class="ms-pill">Live</span></h2>
-        <p class="ms-muted">Number sense • operations • fractions/decimals • problem solving</p>
-        <div class="ms-actions">
-          <a class="ms-btn primary" href="./school/foundations/index.html">Open Course →</a>
-          <a class="ms-btn" href="./school/index.html">School Hub</a>
-        </div>
-      </section>
-
-      <section class="ms-card">
-        <h2>Pre-Algebra Mastery <span class="ms-pill">Next</span></h2>
-        <p class="ms-muted">Integers • expressions • equations • ratios/rates • percents</p>
-        <div class="ms-actions">
-          <a class="ms-btn" href="./school/index.html">Preview Path →</a>
-        </div>
-      </section>
-    </div>
-
-    <!-- CTA -->
     <section class="ms-cta">
-      <h2 style="margin:0 0 6px;">Ready to make this feel like a real product?</h2>
+      <h2 style="margin:0 0 6px;">Enter the School</h2>
       <p class="ms-muted" style="margin:0 0 12px;">
-        Next upgrade after styling: lesson pages get the same layout + a progress checklist UI.
+        Next upgrade: progress checklist UI + “Next Lesson” smart button on every lesson.
       </p>
       <div class="ms-actions">
-        <a class="ms-btn primary" href="./school/index.html">Enter the School →</a>
+        <a class="ms-btn primary" href="./school/index.html">School Hub →</a>
         <a class="ms-btn" href="./school/foundations/module-1/lesson-1.html">Start Lesson 1 →</a>
       </div>
     </section>
@@ -219,6 +268,27 @@
     const last = localStorage.getItem("ms_last_lesson_url");
     const btn = document.getElementById("continueBtn");
     if (last && btn) btn.href = last;
+
+    // Simple “holo tilt” interaction (Web3 feel)
+    const stage = document.getElementById("holoCards");
+    const cards = stage ? stage.querySelectorAll(".ms-cardImg") : [];
+    if (stage && cards.length) {
+      stage.addEventListener("mousemove", (e) => {
+        const r = stage.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+
+        // Gentle tilt + float offsets per layer
+        cards.forEach((img, i) => {
+          const depth = (i + 1) * 6;
+          img.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0) rotate(${x * 2}deg)`;
+        });
+      });
+
+      stage.addEventListener("mouseleave", () => {
+        cards.forEach((img) => img.style.transform = "translate3d(0,0,0) rotate(0deg)");
+      });
+    }
   </script>
 </body>
 </html>

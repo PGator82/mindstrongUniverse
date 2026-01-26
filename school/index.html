@@ -1,39 +1,74 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>MindStrong School</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <link rel="stylesheet" href="../../../theme.css" />
+  <link rel="stylesheet" href="../theme.css" />
 </head>
 <body>
-  <header style="padding:16px;">
-    <nav style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../index.html">Home</a>
-      <a href="./index.html"><strong>School</strong></a>
-    </nav>
+  <header class="ms-top">
+    <div class="ms-nav">
+      <div class="ms-brand">
+        <span class="ms-dot"></span>
+        <span>MindStrong Universe</span>
+      </div>
+      <nav class="ms-links">
+        <a class="ms-link" href="../index.html">Home</a>
+        <a class="ms-link is-active" href="./index.html">School</a>
+      </nav>
+    </div>
   </header>
 
-  <main style="max-width: 980px; margin: 0 auto; padding: 24px;">
-    <h1>MindStrong School</h1>
-    <p>Pick a course. Start learning. Track your progress later.</p>
-
-    <section style="margin-top:24px; padding:16px; border:1px solid #ddd; border-radius:12px;">
-      <h2>Math Foundations</h2>
-      <p>Number sense, fractions, decimals, and problem-solving fundamentals.</p>
-      <a href="./foundations/index.html">Open Course →</a>
+  <main class="ms-wrap">
+    <section class="ms-hero">
+      <span class="ms-kicker">🚀 <b>Online School</b> • Foundations → Pre-Algebra</span>
+      <h1 class="ms-h1">Math that feels like a superpower.</h1>
+      <p class="ms-sub">Short lessons. Real hacks. Clean practice. “Continue Learning” remembers your last stop on this device.</p>
     </section>
 
-    <section style="margin-top:16px; padding:16px; border:1px solid #ddd; border-radius:12px;">
-      <h2>Pre-Algebra Mastery</h2>
-      <p>Coming next (we’ll add this after Foundations is solid).</p>
-      <span style="opacity:.7;">Locked for now</span>
-    </section>
+    <div class="ms-grid">
+      <section class="ms-card">
+        <h2>Continue Learning</h2>
+        <p>Jump back to your last lesson.</p>
+        <div class="ms-actions">
+          <a id="continueBtn" class="ms-btn primary" href="./foundations/index.html">
+            Continue <span class="chev">→</span>
+          </a>
+          <a class="ms-btn" href="./foundations/index.html">Browse Foundations</a>
+        </div>
+        <div class="ms-note">Progress is saved locally for now (Supabase sync later).</div>
+      </section>
+
+      <section class="ms-card">
+        <h2>Courses</h2>
+        <ul class="ms-list">
+          <li class="ms-item">
+            <div class="left">
+              <div class="title">Math Foundations</div>
+              <div class="meta">Number sense • Fractions • Decimals • Problem solving</div>
+            </div>
+            <a class="ms-btn" href="./foundations/index.html">Open →</a>
+          </li>
+          <li class="ms-item">
+            <div class="left">
+              <div class="title">Pre-Algebra Mastery</div>
+              <div class="meta">Integers • Expressions • Equations • Ratios/percents</div>
+            </div>
+            <span class="ms-pill">Next</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <footer class="ms-footer">© MindStrong Universe</footer>
   </main>
 
-  <footer style="padding:24px; text-align:center; opacity:.7;">
-    © MindStrong Universe
-  </footer>
+  <script>
+    const last = localStorage.getItem("ms_last_lesson_url");
+    const btn = document.getElementById("continueBtn");
+    if (last && btn) btn.href = last;
+  </script>
 </body>
 </html>

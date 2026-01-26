@@ -4,48 +4,70 @@
   <meta charset="UTF-8" />
   <title>MindStrong School</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./school.css" />
+  <link rel="stylesheet" href="../theme.css" />
 </head>
 <body>
-  <header class="ms-nav">
-    <a href="../index.html">Home</a>
-    <a href="./school/foundations/index.html">Go to Foundations →</a>
+  <header class="ms-top">
+    <div class="ms-nav">
+      <div class="ms-brand">
+        <span class="ms-dot"></span>
+        <span>MindStrong Universe</span>
+      </div>
+      <nav class="ms-links">
+        <a class="ms-link" href="../index.html">Home</a>
+        <a class="ms-link is-active" href="./index.html">School</a>
+      </nav>
+    </div>
   </header>
 
   <main class="ms-wrap">
-    <h1>MindStrong School</h1>
-    <p class="ms-muted">Start with Foundations. Build confidence fast. Track progress automatically.</p>
+    <section class="ms-hero">
+      <span class="ms-kicker">🚀 <b>Online School</b> • Foundations → Pre-Algebra</span>
+      <h1 class="ms-h1">Math that feels like a superpower.</h1>
+      <p class="ms-sub">Short lessons. Real hacks. Clean practice. “Continue Learning” remembers your last stop on this device.</p>
+    </section>
 
-    <div class="ms-card">
-      <h2 style="margin-top:0;">Continue Learning</h2>
-      <p class="ms-muted">Pick up where you left off.</p>
-      <a id="continueBtn" class="ms-btn" href="./foundations/index.html">Go to Foundations →</a>
-      <p class="ms-muted" style="margin-bottom:0; font-size:12px;">(This remembers your last lesson on this device.)</p>
+    <div class="ms-grid">
+      <section class="ms-card">
+        <h2>Continue Learning</h2>
+        <p>Jump back to your last lesson.</p>
+        <div class="ms-actions">
+          <a id="continueBtn" class="ms-btn primary" href="./foundations/index.html">
+            Continue <span class="chev">→</span>
+          </a>
+          <a class="ms-btn" href="./foundations/index.html">Browse Foundations</a>
+        </div>
+        <div class="ms-note">Progress is saved locally for now (Supabase sync later).</div>
+      </section>
+
+      <section class="ms-card">
+        <h2>Courses</h2>
+        <ul class="ms-list">
+          <li class="ms-item">
+            <div class="left">
+              <div class="title">Math Foundations</div>
+              <div class="meta">Number sense • Fractions • Decimals • Problem solving</div>
+            </div>
+            <a class="ms-btn" href="./foundations/index.html">Open →</a>
+          </li>
+          <li class="ms-item">
+            <div class="left">
+              <div class="title">Pre-Algebra Mastery</div>
+              <div class="meta">Integers • Expressions • Equations • Ratios/percents</div>
+            </div>
+            <span class="ms-pill">Next</span>
+          </li>
+        </ul>
+      </section>
     </div>
 
-    <div class="ms-card">
-      <h2 style="margin-top:0;">Math Foundations <span class="ms-badge">Live</span></h2>
-      <p class="ms-muted">Number sense, operations, fractions/decimals, and problem solving.</p>
-      <a class="ms-btn" href="./foundations/index.html">Open Course →</a>
-    </div>
-
-    <div class="ms-card">
-      <h2 style="margin-top:0;">Pre-Algebra Mastery <span class="ms-badge">Next</span></h2>
-      <p class="ms-muted">Coming after Foundations Module 1 is complete.</p>
-      <span class="ms-muted">Locked for now</span>
-    </div>
+    <footer class="ms-footer">© MindStrong Universe</footer>
   </main>
 
-  <footer class="ms-footer">© MindStrong Universe</footer>
-
   <script>
-    // Continue Learning: remembers last visited lesson URL
     const last = localStorage.getItem("ms_last_lesson_url");
     const btn = document.getElementById("continueBtn");
     if (last && btn) btn.href = last;
   </script>
-</body>
-</html>
-
 </body>
 </html>

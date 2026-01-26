@@ -59,5 +59,29 @@
   <footer style="padding:24px; text-align:center; opacity:.7;">
     © MindStrong Universe
   </footer>
+  <script>
+  (function initLessonHolo(){
+    const hero = document.getElementById("lessonHero");
+    const holo = document.getElementById("lessonHolo");
+    const img  = document.getElementById("lessonImg");
+    if (!hero || !holo || !img) return;
+
+    // Load featured image from data-img
+    const src = hero.getAttribute("data-img");
+    if (src) img.src = src;
+
+    // Subtle holo tilt
+    holo.addEventListener("mousemove", (e) => {
+      const r = holo.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      img.style.transform = `translate3d(${x * 10}px, ${y * 10}px, 0) rotate(${x * 2}deg)`;
+    });
+
+    holo.addEventListener("mouseleave", () => {
+      img.style.transform = "translate3d(0,0,0) rotate(0deg)";
+    });
+  })();
+</script>
 </body>
 </html>

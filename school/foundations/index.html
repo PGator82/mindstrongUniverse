@@ -4,45 +4,60 @@
   <meta charset="UTF-8" />
   <title>Math Foundations | MindStrong School</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../school.css" />
+  <link rel="stylesheet" href="../../theme.css" />
 </head>
 <body>
-  <header class="ms-nav">
-    <a href="../../index.html">Home</a>
-    <a href="../index.html">School</a>
-    <a href="./index.html"><strong>Math Foundations</strong></a>
+  <header class="ms-top">
+    <div class="ms-nav">
+      <div class="ms-brand">
+        <span class="ms-dot"></span>
+        <span>MindStrong Universe</span>
+      </div>
+      <nav class="ms-links">
+        <a class="ms-link" href="../../index.html">Home</a>
+        <a class="ms-link" href="../index.html">School</a>
+        <a class="ms-link is-active" href="./index.html">Foundations</a>
+      </nav>
+    </div>
   </header>
 
   <main class="ms-wrap">
-    <h1>Math Foundations</h1>
-    <p class="ms-muted">Course goal: Build real number sense and confidence for middle school math.</p>
+    <section class="ms-hero">
+      <span class="ms-kicker">🧱 <b>Math Foundations</b> • Middle School</span>
+      <h1 class="ms-h1">Module 1: Number Sense & Place Value</h1>
+      <p class="ms-sub">Six short lessons that fix the root problem: number sense. Continue button remembers your last lesson on this device.</p>
+    </section>
 
-    <div class="ms-card">
-      <h2 style="margin-top:0;">Continue Learning</h2>
-      <a id="continueCourseBtn" class="ms-btn" href="./module-1/lesson-1.html">Continue →</a>
-      <p class="ms-muted" style="margin-bottom:0; font-size:12px;">(Remembers your last lesson on this device.)</p>
+    <div class="ms-grid">
+      <section class="ms-card">
+        <h2>Continue</h2>
+        <p>Pick up right where you left off.</p>
+        <div class="ms-actions">
+          <a id="continueCourseBtn" class="ms-btn primary" href="./module-1/lesson-1.html">Continue →</a>
+          <a class="ms-btn" href="./module-1/lesson-1.html">Start at Lesson 1</a>
+        </div>
+        <div class="ms-note">Next upgrade: sign-in progress sync with Supabase (same URLs).</div>
+      </section>
+
+      <section class="ms-card">
+        <h2>Lessons</h2>
+        <ul class="ms-list">
+          <li class="ms-item"><div class="left"><div class="title">Lesson 1: Numbers Are Stories, Not Symbols</div><div class="meta">Scale • magnitude • “feel” numbers</div></div><a class="ms-btn" href="./module-1/lesson-1.html">Open →</a></li>
+          <li class="ms-item"><div class="left"><div class="title">Lesson 2: Place Value Is a Volume Knob</div><div class="meta">×10 left • ÷10 right</div></div><a class="ms-btn" href="./module-1/lesson-2.html">Open →</a></li>
+          <li class="ms-item"><div class="left"><div class="title">Lesson 3: Expanded Form — Breaking Numbers Apart</div><div class="meta">Number LEGO • decomposition</div></div><a class="ms-btn" href="./module-1/lesson-3.html">Open →</a></li>
+          <li class="ms-item"><div class="left"><div class="title">Lesson 4: Compare Numbers Without Guessing</div><div class="meta">Compare from the left</div></div><a class="ms-btn" href="./module-1/lesson-4.html">Open →</a></li>
+          <li class="ms-item"><div class="left"><div class="title">Lesson 5: Rounding Without Memorizing Rules</div><div class="meta">Landmarks • decider digit</div></div><a class="ms-btn" href="./module-1/lesson-5.html">Open →</a></li>
+          <li class="ms-item"><div class="left"><div class="title">Lesson 6: Estimation as a Superpower</div><div class="meta">Smell test • fast checking</div></div><a class="ms-btn" href="./module-1/lesson-6.html">Open →</a></li>
+        </ul>
+      </section>
     </div>
 
-    <div class="ms-card">
-      <h2 style="margin-top:0;">Module 1: Number Sense & Place Value</h2>
-      <ol>
-        <li><a href="./module-1/lesson-1.html">Lesson 1: Numbers Are Stories, Not Symbols</a></li>
-        <li><a href="./module-1/lesson-2.html">Lesson 2: Place Value Is a Volume Knob</a></li>
-        <li><a href="./module-1/lesson-3.html">Lesson 3: Expanded Form — Breaking Numbers Apart</a></li>
-        <li><a href="./module-1/lesson-4.html">Lesson 4: Compare Numbers Without Guessing</a></li>
-        <li><a href="./module-1/lesson-5.html">Lesson 5: Rounding Without Memorizing Rules</a></li>
-        <li><a href="./module-1/lesson-6.html">Lesson 6: Estimation as a Superpower</a></li>
-      </ol>
-      <p class="ms-muted" style="margin-bottom:0;">Module 1 complete after Lesson 6.</p>
-    </div>
+    <footer class="ms-footer">© MindStrong Universe</footer>
   </main>
-
-  <footer class="ms-footer">© MindStrong Universe</footer>
 
   <script>
     const last = localStorage.getItem("ms_last_lesson_url");
     const btn = document.getElementById("continueCourseBtn");
-    // Only keep it if it’s inside this course
     if (last && last.includes("/school/foundations/module-1/") && btn) btn.href = last;
   </script>
 </body>

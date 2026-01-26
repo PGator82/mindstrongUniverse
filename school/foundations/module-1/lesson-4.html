@@ -1,65 +1,77 @@
+<!-- =========================
+FILE: lesson-4.html
+PATH: /school/foundations/module-1/lesson-4.html
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lesson 4 | Compare Numbers</title>
+  <title>MindStrong Universe • Foundations • Module 1 • Lesson 4</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../school.css" />
-  <link rel="stylesheet" href="../../../theme.css" />
+  <link rel="stylesheet" href="../../theme.css" />
+
+  <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
+  <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
+  <meta name="theme-color" content="#0b0f1a" />
+
+  <link rel="stylesheet" href="../../lesson-vibe.css" />
 </head>
+
 <body>
-  <header class="ms-nav">
-    <a href="../../../index.html">Home</a>
-    <a href="../../index.html">School</a>
-    <a href="../index.html">Math Foundations</a>
-    <a href="./lesson-4.html"><strong>Lesson 4</strong></a>
+  <header class="ms-top">
+    <div class="ms-nav">
+      <div class="ms-brand">
+        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
+        <span>MindStrong Universe</span>
+      </div>
+      <nav class="ms-links">
+        <a class="ms-link" href="../../../index.html">Home</a>
+        <a class="ms-link" href="../../index.html">School</a>
+        <a class="ms-link" href="../index.html">Foundations</a>
+      </nav>
+    </div>
   </header>
 
   <main class="ms-wrap">
-    <h1>Lesson 4: Compare Numbers Without Guessing</h1>
-    <p><strong>Goal:</strong> Compare multi-digit numbers using place value, not vibes.</p>
+    <section class="ms-card">
+      <div class="ms-kicker">Module 1 • Lesson 4</div>
+      <h1 class="ms-h1" style="margin-top:8px;">Lesson 4 Title</h1>
+      <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
 
-    <h2>Hook</h2>
-    <p>Comparing numbers should feel like reading a scoreboard. If it feels like a puzzle, you’re missing the method.</p>
+      <div class="ms-hr"></div>
+      <p class="ms-muted">Paste Lesson 4 content here.</p>
 
-    <h2>The Hack</h2>
-    <p><strong>Compare from the left.</strong> The first place that’s different decides the winner.</p>
-    <ul>
-      <li>Thousands decide before hundreds.</li>
-      <li>Hundreds decide before tens.</li>
-      <li>Tens decide before ones.</li>
-    </ul>
-
-    <h2>Standard Method</h2>
-    <p>Align numbers by place value and compare digits from greatest place to least.</p>
-
-    <h2>Guided Practice</h2>
-    <ol>
-      <li>Which is greater: <strong>4,205</strong> or <strong>4,052</strong>? Explain in one sentence.</li>
-      <li>Put these in order least → greatest: <strong>900</strong>, <strong>1,090</strong>, <strong>1,009</strong>.</li>
-      <li>True/False: <strong>3,999</strong> is greater than <strong>4,001</strong>.</li>
-      <li>Choose the correct symbol: <strong>6,120 __ 6,102</strong>.</li>
-    </ol>
-
-    <h2>Boss Problem</h2>
-    <p>A student says <strong>5,099</strong> is bigger than <strong>5,900</strong> because “99 is bigger than 900.” Fix their thinking using the left-to-right method.</p>
-
-    <h2>Exit Check</h2>
-    <p>Which is greater: <strong>8,407</strong> or <strong>8,470</strong>?</p>
-    <details><summary>Answer</summary><p><strong>8,470</strong> (compare hundreds: 4 = 4, then tens: 7 > 0)</p></details>
-
-    <hr class="ms-hr" />
-    <p>
-      <a class="ms-btn" href="./lesson-3.html">← Back</a>
-      &nbsp;
-      <a class="ms-btn" href="./lesson-5.html">Next →</a>
-    </p>
+      <div class="ms-hr"></div>
+      <div class="ms-actions">
+        <a class="ms-btn" href="./lesson-3.html">← Prev</a>
+        <a class="ms-btn" href="../index.html">Module</a>
+        <a class="ms-btn primary" href="./lesson-5.html">Next →</a>
+      </div>
+    </section>
   </main>
 
-  <footer class="ms-footer">© MindStrong Universe</footer>
-
   <script>
-    localStorage.setItem("ms_last_lesson_url", window.location.href);
+    (function(){
+      localStorage.setItem("ms_last_lesson_url", window.location.pathname);
+      const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
+      if (!match) return;
+      const lessonNum = Number(match[1]);
+      if (!Number.isFinite(lessonNum)) return;
+
+      const key = "ms_m1_done";
+      let arr = [];
+      try {
+        arr = JSON.parse(localStorage.getItem(key) || "[]");
+        if (!Array.isArray(arr)) arr = [];
+      } catch { arr = []; }
+
+      if (!arr.includes(lessonNum)) {
+        arr.push(lessonNum);
+        localStorage.setItem(key, JSON.stringify(arr));
+      }
+    })();
   </script>
+
+  <script src="../../lesson-vibe.js"></script>
 </body>
 </html>

@@ -6,26 +6,23 @@ PATH: /school/foundations/module-1/lesson-1.html
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MindStrong Universe • Foundations • Module 1 • Lesson 1</title>
+  <title>MindStrong Universe • Foundations • Lesson 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Base theme -->
-  <link rel="stylesheet" href="../../theme.css" />
+  <!-- THEME (ROOT) -->
+  <link rel="stylesheet" href="../../../theme.css" />
 
-  <!-- Favicon / App Icon (repo root) -->
-  <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
-  <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
+  <!-- FAVICON + APP ICON (ROOT) -->
+  <link rel="icon" type="image/svg+xml" href="../../../Mindstrong.svg" />
+  <link rel="apple-touch-icon" href="../../../Mindstrong.svg" />
   <meta name="theme-color" content="#0b0f1a" />
-
-  <!-- Web3 vibe for lesson pages (shared) -->
-  <link rel="stylesheet" href="../../lesson-vibe.css" />
 </head>
 
 <body>
   <header class="ms-top">
     <div class="ms-nav">
       <div class="ms-brand">
-        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
+        <img src="../../../Mindstrong.svg" alt="MindStrong Universe" class="ms-brandLogo" />
         <span>MindStrong Universe</span>
       </div>
 
@@ -33,35 +30,56 @@ PATH: /school/foundations/module-1/lesson-1.html
         <a class="ms-link" href="../../../index.html">Home</a>
         <a class="ms-link" href="../../index.html">School</a>
         <a class="ms-link" href="../index.html">Foundations</a>
+        <a class="ms-link is-active" href="./lesson-1.html">Lesson 1</a>
       </nav>
     </div>
   </header>
 
   <main class="ms-wrap">
-    <section class="ms-card">
-      <div class="ms-kicker">Module 1 • Lesson 1</div>
-      <h1 class="ms-h1" style="margin-top:8px;">Lesson 1 Title</h1>
+    <section class="ms-hero">
+      <span class="ms-kicker">🧱 Foundations • Module 1</span>
+      <h1 class="ms-h1">Lesson 1 — Numbers Are Stories</h1>
       <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
+    </section>
 
-      <!-- ✅ Your lesson content goes here -->
+    <section class="ms-card">
+      <h2>Hook</h2>
+      <p>(Write your hook here.)</p>
+
       <div class="ms-hr"></div>
-      <p class="ms-muted">Paste Lesson 1 content here.</p>
+
+      <h2>The Hack</h2>
+      <p>(Write your hack here.)</p>
+
+      <div class="ms-hr"></div>
+
+      <h2>Practice</h2>
+      <p>(Practice problems here.)</p>
+
+      <div class="ms-hr"></div>
+
+      <h2>Exit Check</h2>
+      <p>(Quick check here.)</p>
 
       <div class="ms-hr"></div>
 
       <div class="ms-actions">
-        <a class="ms-btn" href="../index.html">Back to Module</a>
+        <a class="ms-btn" href="../index.html">← Back to Foundations</a>
         <a class="ms-btn primary" href="./lesson-2.html">Next Lesson →</a>
       </div>
     </section>
 
-    <!-- ✅ Holo/images panel will be injected by lesson-vibe.js -->
+    <footer class="ms-footer">© MindStrong Universe • Foundations • Module 1</footer>
   </main>
 
-  <!-- ✅ Track last lesson + auto-complete -->
+  <!-- Progress + Continue Learning tracking -->
   <script>
     (function(){
+      // Always track last visited lesson
       localStorage.setItem("ms_last_lesson_url", window.location.pathname);
+
+      // Auto-mark Module 1 lesson as completed
+      // Expect filenames like: lesson-1.html ... lesson-6.html
       const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
       if (!match) return;
 
@@ -70,19 +88,18 @@ PATH: /school/foundations/module-1/lesson-1.html
 
       const key = "ms_m1_done";
       let arr = [];
+
       try {
         arr = JSON.parse(localStorage.getItem(key) || "[]");
         if (!Array.isArray(arr)) arr = [];
       } catch { arr = []; }
 
+      // Add lesson number if not present
       if (!arr.includes(lessonNum)) {
         arr.push(lessonNum);
         localStorage.setItem(key, JSON.stringify(arr));
       }
     })();
   </script>
-
-  <!-- ✅ Web3 vibe + repo images injector -->
-  <script src="../../lesson-vibe.js"></script>
 </body>
 </html>

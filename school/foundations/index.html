@@ -5,14 +5,87 @@
   <title>MindStrong Universe • Foundations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- THEME -->
- <!-- THEME (ROOT) -->
-<link rel="stylesheet" href="../../theme.css" />
+  <!-- THEME (ROOT) -->
+  <link rel="stylesheet" href="../../theme.css" />
 
-<!-- FAVICON + APP ICON (ROOT) -->
-<link rel="icon" type="image/svg+xml" href="../../Mindstrong.svg" />
-<link rel="apple-touch-icon" href="../../Mindstrong.svg" />
-<meta name="theme-color" content="#0b0f1a" />
+  <!-- FAVICON + APP ICON (ROOT) -->
+  <link rel="icon" type="image/svg+xml" href="../../mindstronguniverse.svg" />
+  <link rel="apple-touch-icon" href="../../mindstronguniverse.svg" />
+  <meta name="theme-color" content="#0b0f1a" />
+
+  <style>
+    /* Tiny add-ons that won't fight theme.css */
+    .ms-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+      border-bottom: 1px solid var(--stroke);
+    }
+    .ms-item:last-child{ border-bottom:none; }
+
+    .ms-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
+    }
+    .ms-badge{
+      width:26px; height:26px;
+      border-radius: 8px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      flex: 0 0 auto;
+      font-weight:800;
+      font-size:12px;
+    }
+    .ms-check{
+      border-color: rgba(34,211,238,.35);
+      background: rgba(34,211,238,.10);
+      box-shadow: 0 0 0 3px rgba(34,211,238,.08);
+    }
+    .ms-titleWrap{
+      min-width:0;
+    }
+    .ms-title{
+      font-weight:800;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .ms-subtle{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top:2px;
+    }
+
+    .ms-progress{
+      margin-top: 12px;
+      padding: 12px;
+      border:1px solid var(--stroke);
+      border-radius: calc(var(--r) + 2px);
+      background: rgba(255,255,255,.03);
+    }
+    .ms-bar{
+      height:10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.10);
+      overflow:hidden;
+      margin-top:10px;
+    }
+    .ms-bar > div{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background: rgba(34,211,238,.55);
+      transition: width .45s ease;
+      box-shadow: 0 0 18px rgba(34,211,238,.18);
+    }
+  </style>
 </head>
 
 <body>
@@ -20,7 +93,7 @@
   <header class="ms-top">
     <div class="ms-nav">
       <div class="ms-brand">
-       <img src="../../Mindstrong.svg" alt="MindStrong Universe" class="ms-brandLogo" />
+        <img src="../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
         <span>MindStrong Universe</span>
       </div>
 
@@ -37,9 +110,7 @@
     <section class="ms-hero">
       <span class="ms-kicker">🧱 Foundations • Middle School</span>
       <h1 class="ms-h1">Math Foundations</h1>
-      <p class="ms-sub">
-        Fix number sense first. Everything else stacks cleanly after.
-      </p>
+      <p class="ms-sub">Fix number sense first. Everything else stacks cleanly after.</p>
     </section>
 
     <!-- MODULE CARD -->
@@ -48,44 +119,159 @@
       <p>Six short lessons. Zero fluff.</p>
 
       <div class="ms-actions">
-        <a class="ms-btn primary" href="./module-1/lesson-1.html">
-          Start Lesson 1 →
-        </a>
+        <a id="startBtn" class="ms-btn primary" href="./module-1/lesson-1.html">Start Lesson 1 →</a>
+        <a id="continueBtn" class="ms-btn" href="../index.html">Continue Learning</a>
+      </div>
+
+      <div class="ms-progress" aria-label="Module 1 progress">
+        <div style="display:flex; justify-content:space-between; gap:10px;">
+          <div><b id="m1Count">0</b><span style="color:var(--muted)"> / 6 completed</span></div>
+          <button id="resetBtn" class="ms-btn" type="button" title="Reset Module 1 progress">Reset</button>
+        </div>
+        <div class="ms-bar" aria-hidden="true"><div id="m1Bar"></div></div>
+        <div class="ms-subtle" id="m1Label">Complete lessons to unlock momentum.</div>
       </div>
 
       <div class="ms-hr"></div>
 
-      <ul class="ms-list">
-        <li class="ms-item">
-          <span>Lesson 1 — Numbers Are Stories</span>
+      <div class="ms-list" id="lessonList">
+        <!-- JS will decorate these with checkmarks -->
+        <div class="ms-item" data-lesson="1">
+          <div class="ms-row">
+            <span class="ms-badge" id="b1">1</span>
+            <div class="ms-titleWrap">
+              <div class="ms-title">Lesson 1 — Numbers Are Stories</div>
+              <div class="ms-subtle">Magnitude + meaning</div>
+            </div>
+          </div>
           <a class="ms-btn" href="./module-1/lesson-1.html">Open</a>
-        </li>
-        <li class="ms-item">
-          <span>Lesson 2 — Place Value Is a Volume Knob</span>
+        </div>
+
+        <div class="ms-item" data-lesson="2">
+          <div class="ms-row">
+            <span class="ms-badge" id="b2">2</span>
+            <div class="ms-titleWrap">
+              <div class="ms-title">Lesson 2 — Place Value Is a Volume Knob</div>
+              <div class="ms-subtle">×10 louder, ÷10 quieter</div>
+            </div>
+          </div>
           <a class="ms-btn" href="./module-1/lesson-2.html">Open</a>
-        </li>
-        <li class="ms-item">
-          <span>Lesson 3 — Expanded Form</span>
+        </div>
+
+        <div class="ms-item" data-lesson="3">
+          <div class="ms-row">
+            <span class="ms-badge" id="b3">3</span>
+            <div class="ms-titleWrap">
+              <div class="ms-title">Lesson 3 — Expanded Form</div>
+              <div class="ms-subtle">Number LEGO</div>
+            </div>
+          </div>
           <a class="ms-btn" href="./module-1/lesson-3.html">Open</a>
-        </li>
-        <li class="ms-item">
-          <span>Lesson 4 — Compare Without Guessing</span>
+        </div>
+
+        <div class="ms-item" data-lesson="4">
+          <div class="ms-row">
+            <span class="ms-badge" id="b4">4</span>
+            <div class="ms-titleWrap">
+              <div class="ms-title">Lesson 4 — Compare Without Guessing</div>
+              <div class="ms-subtle">Compare left-to-right</div>
+            </div>
+          </div>
           <a class="ms-btn" href="./module-1/lesson-4.html">Open</a>
-        </li>
-        <li class="ms-item">
-          <span>Lesson 5 — Rounding That Makes Sense</span>
+        </div>
+
+        <div class="ms-item" data-lesson="5">
+          <div class="ms-row">
+            <span class="ms-badge" id="b5">5</span>
+            <div class="ms-titleWrap">
+              <div class="ms-title">Lesson 5 — Rounding That Makes Sense</div>
+              <div class="ms-subtle">Landmarks, not chants</div>
+            </div>
+          </div>
           <a class="ms-btn" href="./module-1/lesson-5.html">Open</a>
-        </li>
-        <li class="ms-item">
-          <span>Lesson 6 — Estimation as a Superpower</span>
+        </div>
+
+        <div class="ms-item" data-lesson="6">
+          <div class="ms-row">
+            <span class="ms-badge" id="b6">6</span>
+            <div class="ms-titleWrap">
+              <div class="ms-title">Lesson 6 — Estimation as a Superpower</div>
+              <div class="ms-subtle">Smell test for math</div>
+            </div>
+          </div>
           <a class="ms-btn" href="./module-1/lesson-6.html">Open</a>
-        </li>
-      </ul>
+        </div>
+      </div>
     </section>
 
-    <footer class="ms-footer">
-      © MindStrong Universe • Foundations
-    </footer>
+    <footer class="ms-footer">© MindStrong Universe • Foundations</footer>
   </main>
+
+  <script>
+    // Continue Learning: use last lesson if available
+    const last = localStorage.getItem("ms_last_lesson_url");
+    const continueBtn = document.getElementById("continueBtn");
+    if (last && continueBtn) continueBtn.href = last;
+
+    // Progress + checklist UI
+    const KEY = "ms_m1_done";
+    const total = 6;
+
+    function getDoneSet(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        const arr = raw ? JSON.parse(raw) : [];
+        return new Set(Array.isArray(arr) ? arr : []);
+      } catch {
+        return new Set();
+      }
+    }
+
+    function render(){
+      const done = getDoneSet();
+      const count = Math.max(0, Math.min(total, done.size));
+
+      // bar + label
+      const m1Count = document.getElementById("m1Count");
+      const m1Bar = document.getElementById("m1Bar");
+      const m1Label = document.getElementById("m1Label");
+      if (m1Count) m1Count.textContent = String(count);
+      if (m1Bar) m1Bar.style.width = `${(count/total)*100}%`;
+      if (m1Label) m1Label.textContent = count === total
+        ? "Module complete. That’s real discipline."
+        : "Complete lessons to unlock momentum.";
+
+      // check badges
+      for (let i=1; i<=total; i++){
+        const badge = document.getElementById(`b${i}`);
+        if (!badge) continue;
+        if (done.has(i)){
+          badge.classList.add("ms-check");
+          badge.textContent = "✓";
+        } else {
+          badge.classList.remove("ms-check");
+          badge.textContent = String(i);
+        }
+      }
+
+      // start button becomes "Resume"
+      const startBtn = document.getElementById("startBtn");
+      if (startBtn && count > 0 && last){
+        startBtn.textContent = "Resume →";
+        startBtn.href = last;
+      }
+    }
+
+    render();
+
+    // Reset progress
+    const resetBtn = document.getElementById("resetBtn");
+    if (resetBtn){
+      resetBtn.addEventListener("click", () => {
+        localStorage.removeItem(KEY);
+        render();
+      });
+    }
+  </script>
 </body>
 </html>

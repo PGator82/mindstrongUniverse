@@ -2,75 +2,40 @@
 FILE: lesson-6.html
 PATH: /school/foundations/module-1/lesson-6.html
 ========================= -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>MindStrong Universe • Foundations • Module 1 • Lesson 6</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../theme.css" />
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8"><title>Lesson 6</title>
+<link rel="stylesheet" href="../../../theme.css">
+<link rel="icon" href="../../../mindstronguniverse.svg">
+</head><body>
 
-  <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
-  <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
-  <meta name="theme-color" content="#0b0f1a" />
+<main class="ms-wrap">
+<h1 class="ms-h1">Lesson 6 — Estimation as a Superpower</h1>
 
-  <link rel="stylesheet" href="../../lesson-vibe.css" />
-</head>
+<section class="ms-card">
+<h2>The Hack</h2>
+<p>Estimation is a <b>smell test</b>. Bad answers stink.</p>
+</section>
 
-<body>
-  <header class="ms-top">
-    <div class="ms-nav">
-      <div class="ms-brand">
-        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
-        <span>MindStrong Universe</span>
-      </div>
-      <nav class="ms-links">
-        <a class="ms-link" href="../../../index.html">Home</a>
-        <a class="ms-link" href="../../index.html">School</a>
-        <a class="ms-link" href="../index.html">Foundations</a>
-      </nav>
-    </div>
-  </header>
+<section class="ms-card">
+<h2>Practice</h2>
+<ul>
+<li>Is 498 × 6 closer to 3,000 or 30,000?</li>
+<li>Does 12,400 ÷ 4 ≈ 3,000 make sense?</li>
+</ul>
+</section>
 
-  <main class="ms-wrap">
-    <section class="ms-card">
-      <div class="ms-kicker">Module 1 • Lesson 6</div>
-      <h1 class="ms-h1" style="margin-top:8px;">Lesson 6 Title</h1>
-      <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
+<section class="ms-card">
+<h2>Exit Check</h2>
+<p>Why is estimation more powerful than exact math?</p>
+</section>
 
-      <div class="ms-hr"></div>
-      <p class="ms-muted">Paste Lesson 6 content here.</p>
+<a href="../index.html" class="ms-btn primary">Back to Foundations →</a>
+</main>
 
-      <div class="ms-hr"></div>
-      <div class="ms-actions">
-        <a class="ms-btn" href="./lesson-5.html">← Prev</a>
-        <a class="ms-btn primary" href="../index.html">Finish Module →</a>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    (function(){
-      localStorage.setItem("ms_last_lesson_url", window.location.pathname);
-      const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
-      if (!match) return;
-      const lessonNum = Number(match[1]);
-      if (!Number.isFinite(lessonNum)) return;
-
-      const key = "ms_m1_done";
-      let arr = [];
-      try {
-        arr = JSON.parse(localStorage.getItem(key) || "[]");
-        if (!Array.isArray(arr)) arr = [];
-      } catch { arr = []; }
-
-      if (!arr.includes(lessonNum)) {
-        arr.push(lessonNum);
-        localStorage.setItem(key, JSON.stringify(arr));
-      }
-    })();
-  </script>
-
-  <script src="../../lesson-vibe.js"></script>
-</body>
-</html>
+<script>
+const K="ms_m1_done",L=6;
+localStorage.setItem("ms_last_lesson_url",location.pathname);
+const s=new Set(JSON.parse(localStorage.getItem(K)||"[]"));s.add(L);
+localStorage.setItem(K,JSON.stringify([...s]));
+</script>
+</body></html>

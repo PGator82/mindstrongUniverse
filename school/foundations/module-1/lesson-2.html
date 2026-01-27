@@ -6,71 +6,103 @@ PATH: /school/foundations/module-1/lesson-2.html
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MindStrong Universe • Foundations • Module 1 • Lesson 2</title>
+  <title>Foundations • Lesson 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../theme.css" />
 
+  <link rel="stylesheet" href="../../../theme.css" />
   <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
   <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
   <meta name="theme-color" content="#0b0f1a" />
 
-  <link rel="stylesheet" href="../../lesson-vibe.css" />
+  <style>
+    .ms-lessonGrid{ display:grid; gap:14px; margin-top:14px; }
+    .ms-chip{ display:inline-flex; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--stroke); background:rgba(255,255,255,.04);
+      font-size:12px; color:var(--muted);}
+    .ms-glowDone{
+      border-color: rgba(34,211,238,.35)!important;
+      box-shadow:0 0 0 3px rgba(34,211,238,.10),0 0 22px rgba(34,211,238,.18);}
+  </style>
 </head>
 
 <body>
-  <header class="ms-top">
-    <div class="ms-nav">
-      <div class="ms-brand">
-        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
-        <span>MindStrong Universe</span>
-      </div>
-      <nav class="ms-links">
-        <a class="ms-link" href="../../../index.html">Home</a>
-        <a class="ms-link" href="../../index.html">School</a>
-        <a class="ms-link" href="../index.html">Foundations</a>
-      </nav>
+<header class="ms-top">
+  <div class="ms-nav">
+    <div class="ms-brand">
+      <img src="../../../mindstronguniverse.svg" class="ms-brandLogo" />
+      <span>MindStrong Universe</span>
     </div>
-  </header>
+    <nav class="ms-links">
+      <a class="ms-link" href="../../../index.html">Home</a>
+      <a class="ms-link" href="../../index.html">School</a>
+      <a class="ms-link" href="../index.html">Foundations</a>
+      <a class="ms-link is-active">Lesson 2</a>
+    </nav>
+  </div>
+</header>
 
-  <main class="ms-wrap">
-    <section class="ms-card">
-      <div class="ms-kicker">Module 1 • Lesson 2</div>
-      <h1 class="ms-h1" style="margin-top:8px;">Lesson 2 Title</h1>
-      <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
+<main class="ms-wrap">
+<section class="ms-hero">
+  <span class="ms-kicker">🧱 Foundations • Module 1</span>
+  <h1 class="ms-h1">Lesson 2 — Place Value Is a Volume Knob</h1>
+  <p class="ms-sub">Every move left makes the number louder. Every move right makes it quieter.</p>
 
-      <div class="ms-hr"></div>
-      <p class="ms-muted">Paste Lesson 2 content here.</p>
+  <div class="ms-actions">
+    <button id="completeBtn" class="ms-btn primary">Mark Complete ✓</button>
+    <a id="nextBtn" class="ms-btn">Next Lesson →</a>
+    <a class="ms-btn" href="../index.html">Back</a>
+  </div>
+  <span class="ms-chip" id="statusChip">Status: Not completed</span>
+</section>
 
-      <div class="ms-hr"></div>
-      <div class="ms-actions">
-        <a class="ms-btn" href="./lesson-1.html">← Prev</a>
-        <a class="ms-btn" href="../index.html">Module</a>
-        <a class="ms-btn primary" href="./lesson-3.html">Next →</a>
-      </div>
-    </section>
-  </main>
+<div class="ms-lessonGrid">
+<section class="ms-card">
+<h2>Hook</h2>
+<p>Why does 300 feel way bigger than 30, even though it’s the same digits?</p>
+</section>
 
-  <script>
-    (function(){
-      localStorage.setItem("ms_last_lesson_url", window.location.pathname);
-      const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
-      if (!match) return;
-      const lessonNum = Number(match[1]);
-      if (!Number.isFinite(lessonNum)) return;
+<section class="ms-card">
+<h2>The Hack</h2>
+<p><b>Place value is a volume knob.</b></p>
+<ul>
+<li>Move left → ×10 louder</li>
+<li>Move right → ÷10 quieter</li>
+</ul>
+</section>
 
-      const key = "ms_m1_done";
-      let arr = [];
-      try {
-        arr = JSON.parse(localStorage.getItem(key) || "[]");
-        if (!Array.isArray(arr)) arr = [];
-      } catch { arr = []; }
+<section class="ms-card">
+<h2>Practice</h2>
+<ol>
+<li>Which is louder: 4 or 40?</li>
+<li>What happens to 7 when it moves two places left?</li>
+<li>Explain 600 vs 60 without saying the digits.</li>
+</ol>
+</section>
 
-      if (!arr.includes(lessonNum)) {
-        arr.push(lessonNum);
-        localStorage.setItem(key, JSON.stringify(arr));
-      }
-    })();
-  </script>
+<section class="ms-card">
+<h2>Exit Check</h2>
+<p>If 5 becomes 500, what happened to the volume?</p>
+</section>
+</div>
+
+<footer class="ms-footer">© MindStrong Universe</footer>
+</main>
+
+<script>
+const LESSON_NUM=2,TOTAL=6,KEY="ms_m1_done";
+localStorage.setItem("ms_last_lesson_url",location.pathname);
+const nextBtn=document.getElementById("nextBtn");
+nextBtn.href="./lesson-3.html";
+const btn=document.getElementById("completeBtn"),chip=document.getElementById("statusChip");
+function get(){return new Set(JSON.parse(localStorage.getItem(KEY)||"[]"))}
+function save(s){localStorage.setItem(KEY,JSON.stringify([...s]))}
+function render(){const s=get();chip.textContent=s.has(LESSON_NUM)?"Status: Completed ✓":"Status: Not completed";
+btn.classList.toggle("ms-glowDone",s.has(LESSON_NUM));}
+btn.onclick=()=>{const s=get();s.add(LESSON_NUM);save(s);render()};
+render();
+</script>
+</body>
+</html>
 
   <script src="../../lesson-vibe.js"></script>
 </body>

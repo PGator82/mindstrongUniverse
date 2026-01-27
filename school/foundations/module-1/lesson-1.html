@@ -6,26 +6,41 @@ PATH: /school/foundations/module-1/lesson-1.html
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MindStrong Universe • Foundations • Lesson 1</title>
+  <title>Foundations • Lesson 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- THEME (ROOT) -->
   <link rel="stylesheet" href="../../../theme.css" />
 
   <!-- FAVICON + APP ICON (ROOT) -->
-  <link rel="icon" type="image/svg+xml" href="../../../Mindstrong.svg" />
-  <link rel="apple-touch-icon" href="../../../Mindstrong.svg" />
+  <link rel="icon" type="image/svg+xml" href="../../../mindstronguniverse.svg" />
+  <link rel="apple-touch-icon" href="../../../mindstronguniverse.svg" />
   <meta name="theme-color" content="#0b0f1a" />
+
+  <style>
+    .ms-lessonGrid{ display:grid; gap:14px; margin-top:14px; }
+    .ms-chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      color: var(--muted); font-size:12px;
+    }
+    .ms-glowDone{
+      border-color: rgba(34,211,238,.35) !important;
+      box-shadow: 0 0 0 3px rgba(34,211,238,.10), 0 0 22px rgba(34,211,238,.18);
+    }
+    .ms-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+  </style>
 </head>
 
 <body>
   <header class="ms-top">
     <div class="ms-nav">
       <div class="ms-brand">
-        <img src="../../../Mindstrong.svg" alt="MindStrong Universe" class="ms-brandLogo" />
+        <img src="../../../mindstronguniverse.svg" alt="MindStrong Universe" class="ms-brandLogo" />
         <span>MindStrong Universe</span>
       </div>
-
       <nav class="ms-links">
         <a class="ms-link" href="../../../index.html">Home</a>
         <a class="ms-link" href="../../index.html">School</a>
@@ -39,67 +54,110 @@ PATH: /school/foundations/module-1/lesson-1.html
     <section class="ms-hero">
       <span class="ms-kicker">🧱 Foundations • Module 1</span>
       <h1 class="ms-h1">Lesson 1 — Numbers Are Stories</h1>
-      <p class="ms-sub">Hook → Hack → Practice → Exit Check</p>
-    </section>
-
-    <section class="ms-card">
-      <h2>Hook</h2>
-      <p>(Write your hook here.)</p>
-
-      <div class="ms-hr"></div>
-
-      <h2>The Hack</h2>
-      <p>(Write your hack here.)</p>
-
-      <div class="ms-hr"></div>
-
-      <h2>Practice</h2>
-      <p>(Practice problems here.)</p>
-
-      <div class="ms-hr"></div>
-
-      <h2>Exit Check</h2>
-      <p>(Quick check here.)</p>
-
-      <div class="ms-hr"></div>
+      <p class="ms-sub">Numbers aren’t just symbols. They’re meaning + size.</p>
 
       <div class="ms-actions">
-        <a class="ms-btn" href="../index.html">← Back to Foundations</a>
-        <a class="ms-btn primary" href="./lesson-2.html">Next Lesson →</a>
+        <button id="completeBtn" class="ms-btn primary" type="button">Mark Complete ✓</button>
+        <a id="nextBtn" class="ms-btn" href="./lesson-2.html">Next Lesson →</a>
+        <a class="ms-btn" href="../index.html">Back to Foundations</a>
+      </div>
+
+      <div style="margin-top:10px;">
+        <span class="ms-chip" id="statusChip">Status: Not completed</span>
       </div>
     </section>
 
-    <footer class="ms-footer">© MindStrong Universe • Foundations • Module 1</footer>
+    <div class="ms-lessonGrid">
+      <section class="ms-card">
+        <h2>Hook</h2>
+        <p>Numbers aren’t just marks on paper. They tell stories about <b>size</b>, <b>distance</b>, and <b>amount</b>.</p>
+        <p><b>9</b> vs <b>900</b> — same digits, totally different story.</p>
+      </section>
+
+      <section class="ms-card">
+        <h2>The Hack</h2>
+        <p><b>Every number answers one question:</b> “How much is this compared to something familiar?”</p>
+        <p>Use anchors:</p>
+        <ul>
+          <li>10 ≈ hands</li>
+          <li>100 ≈ steps</li>
+          <li>1,000 ≈ minutes in a week (almost)</li>
+        </ul>
+      </section>
+
+      <section class="ms-card">
+        <h2>Practice</h2>
+        <ol>
+          <li>Which feels bigger: 450 or 4,500? Why?</li>
+          <li>Which is closer to 1,000: 875 or 1,200?</li>
+          <li>Write a sentence story for the number 3,000.</li>
+        </ol>
+      </section>
+
+      <section class="ms-card">
+        <h2>Exit Check</h2>
+        <p>Explain the difference between <b>looking at digits</b> and <b>understanding magnitude</b>.</p>
+      </section>
+    </div>
+
+    <footer class="ms-footer">© MindStrong Universe • Foundations</footer>
   </main>
 
-  <!-- Progress + Continue Learning tracking -->
   <script>
-    (function(){
-      // Always track last visited lesson
-      localStorage.setItem("ms_last_lesson_url", window.location.pathname);
+    // ====== Smart Progress + Next Lesson ======
+    const LESSON_NUM = 1;
+    const TOTAL = 6;
+    const KEY = "ms_m1_done";
 
-      // Auto-mark Module 1 lesson as completed
-      // Expect filenames like: lesson-1.html ... lesson-6.html
-      const match = window.location.pathname.match(/lesson-(\d+)\.html$/);
-      if (!match) return;
+    // Track last visited lesson (works with GitHub Pages)
+    localStorage.setItem("ms_last_lesson_url", window.location.pathname);
 
-      const lessonNum = Number(match[1]);
-      if (!Number.isFinite(lessonNum)) return;
+    function getArr(){
+      try{
+        const arr = JSON.parse(localStorage.getItem(KEY) || "[]");
+        return Array.isArray(arr) ? arr : [];
+      } catch { return []; }
+    }
+    function setArr(arr){ localStorage.setItem(KEY, JSON.stringify(arr)); }
 
-      const key = "ms_m1_done";
-      let arr = [];
+    function isDone(n){ return new Set(getArr()).has(n); }
 
-      try {
-        arr = JSON.parse(localStorage.getItem(key) || "[]");
-        if (!Array.isArray(arr)) arr = [];
-      } catch { arr = []; }
+    function markDone(n){
+      const arr = getArr();
+      if (!arr.includes(n)) arr.push(n);
+      setArr(arr);
+    }
 
-      // Add lesson number if not present
-      if (!arr.includes(lessonNum)) {
-        arr.push(lessonNum);
-        localStorage.setItem(key, JSON.stringify(arr));
+    // Smart Next button (if last lesson, go back to Foundations)
+    const nextBtn = document.getElementById("nextBtn");
+    if (nextBtn){
+      if (LESSON_NUM >= TOTAL) nextBtn.href = "../index.html";
+      else nextBtn.href = `./lesson-${LESSON_NUM + 1}.html`;
+    }
+
+    // Complete button glow + status
+    const completeBtn = document.getElementById("completeBtn");
+    const statusChip = document.getElementById("statusChip");
+
+    function renderStatus(){
+      const done = isDone(LESSON_NUM);
+      if (statusChip){
+        statusChip.textContent = done ? "Status: Completed ✓" : "Status: Not completed";
       }
-    })();
+      if (completeBtn){
+        completeBtn.classList.toggle("ms-glowDone", done);
+        completeBtn.textContent = done ? "Completed ✓" : "Mark Complete ✓";
+      }
+    }
+
+    if (completeBtn){
+      completeBtn.addEventListener("click", () => {
+        markDone(LESSON_NUM);
+        renderStatus();
+      });
+    }
+
+    renderStatus();
   </script>
 </body>
 </html>

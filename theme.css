@@ -1,3 +1,28 @@
+
+<style>
+  .ms-simTop{display:flex; gap:14px; justify-content:space-between; align-items:flex-start}
+  .ms-simHud{display:grid; grid-template-columns: repeat(4, minmax(90px, 1fr)); gap:10px; min-width: 360px;}
+  .ms-hudItem{border:1px solid var(--stroke); background:rgba(255,255,255,.03); border-radius: calc(var(--r) + 2px); padding:10px;}
+  .ms-hudNum{font-weight:900; font-size:18px; margin-top:6px}
+  .ms-bar{height:10px; border:1px solid var(--stroke); border-radius:999px; overflow:hidden; background:rgba(255,255,255,.03); margin-top:6px}
+  .ms-barFill{height:100%; width:100%; background: rgba(34,211,238,.55); box-shadow: 0 0 18px rgba(34,211,238,.18);}
+  .ms-simGrid{display:grid; grid-template-columns: 1fr 2fr 1fr; gap:14px;}
+  .ms-mini{border:1px solid var(--stroke); background:rgba(255,255,255,.03); border-radius: var(--r); padding:14px;}
+  .ms-answerRow{display:flex; gap:10px; align-items:center}
+  .ms-input{
+    flex:1; padding:12px 12px; border-radius: 12px;
+    border:1px solid var(--stroke); background: rgba(0,0,0,.18);
+    color: inherit; outline: none;
+  }
+  .ms-good{color: rgba(16,185,129,1);}
+  .ms-bad{color: rgba(239,68,68,1);}
+  @media (max-width: 860px){
+    .ms-simTop{flex-direction:column}
+    .ms-simHud{grid-template-columns: repeat(2, minmax(120px,1fr)); min-width:0; width:100%;}
+    .ms-simGrid{grid-template-columns: 1fr;}
+  }
+</style>
+
 /* ===== Lesson Holo Header ===== */
 .ms-lessonHero{
   position: relative;

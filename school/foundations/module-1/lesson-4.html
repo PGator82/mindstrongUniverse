@@ -33,6 +33,71 @@ PATH: /school/foundations/module-1/lesson-4.html
 </section>
 
 <a href="./lesson-5.html" class="ms-btn primary">Next Lesson →</a>
+  <section class="ms-card ms-sim" id="sim">
+  <div class="ms-simTop">
+    <div>
+      <div class="ms-kicker">🧪 Survival Simulation</div>
+      <h2 style="margin:6px 0 0;">Skill Run</h2>
+      <p class="ms-muted" style="margin:6px 0 0;">
+        Stay alive, build streaks, beat the boss. Misses cost health.
+      </p>
+    </div>
+
+    <div class="ms-simHud" aria-label="HUD">
+      <div class="ms-hudItem">
+        <div class="ms-muted">HP</div>
+        <div class="ms-bar"><div id="hpBar" class="ms-barFill"></div></div>
+        <div class="ms-hudNum" id="hpNum">100</div>
+      </div>
+      <div class="ms-hudItem">
+        <div class="ms-muted">Streak</div>
+        <div class="ms-hudNum" id="streakNum">0</div>
+      </div>
+      <div class="ms-hudItem">
+        <div class="ms-muted">XP</div>
+        <div class="ms-hudNum" id="xpNum">0</div>
+      </div>
+      <div class="ms-hudItem">
+        <div class="ms-muted">Threat</div>
+        <div class="ms-hudNum" id="threatNum">1</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ms-actions" style="margin-top:10px;">
+    <button class="ms-btn primary" id="startRun">Start Run</button>
+    <button class="ms-btn" id="toggleTimer">Timer: OFF</button>
+    <button class="ms-btn" id="healBtn" disabled>Use Med Kit (+25 HP)</button>
+  </div>
+
+  <div class="ms-hr"></div>
+
+  <div class="ms-simGrid">
+    <section class="ms-mini">
+      <h3>Round</h3>
+      <p class="ms-muted" id="roundLabel">Press Start Run.</p>
+    </section>
+
+    <section class="ms-mini">
+      <h3>Challenge</h3>
+      <p id="qText" style="margin:0 0 10px;">—</p>
+
+      <div class="ms-answerRow">
+        <input id="qInput" class="ms-input" placeholder="Type answer…" inputmode="decimal" />
+        <button id="submitBtn" class="ms-btn primary" disabled>Submit</button>
+      </div>
+
+      <div class="ms-muted" style="margin-top:10px;" id="feedback">—</div>
+    </section>
+
+    <section class="ms-mini">
+      <h3>Boss Fight</h3>
+      <p class="ms-muted">Exit Check becomes the boss. Win to earn the badge.</p>
+      <button id="bossBtn" class="ms-btn" disabled>Fight Boss</button>
+      <div class="ms-muted" style="margin-top:10px;" id="bossFeed">—</div>
+    </section>
+  </div>
+</section>
 </main>
 
 <script>

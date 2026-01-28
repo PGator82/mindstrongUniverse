@@ -106,4 +106,259 @@ localStorage.setItem("ms_last_lesson_url",location.pathname);
 const s=new Set(JSON.parse(localStorage.getItem(K)||"[]"));s.add(L);
 localStorage.setItem(K,JSON.stringify([...s]));
 </script>
+
+  <script>
+(() => {
+  // ====== REQUIRED: set lesson number per file ======
+  const LESSON_NUM = window.__LESSON_NUM__ || 2; // change per lesson file
+  const TOTAL = 6;
+  const KEY_DONE = "ms_m1_done";
+
+  // Track last visited lesson
+  localStorage.setItem("ms_last_lesson_url", location.pathname);
+
+  // ====== Survival Sim State ======
+  const state = {
+    hp: 100,
+    streak: 0,
+    xp: 0,
+    threat: 1,
+    round: 0,
+    timerOn: false,
+    t0: 0,
+    medkits: 1,
+    running: false,
+    bossUnlocked: false,
+  };
+
+  // ====== DOM ======
+  const hpBar = document.getElementById("hpBar");
+  const hpNum = document.getElementById("hpNum");
+  const streakNum = document.getElementById("streakNum");
+  const xpNum = document.getElementById("xpNum");
+  const threatNum = document.getElementById("threatNum");
+  const roundLabel = document.getElementById("roundLabel");
+  const qText = document.getElementById("qText");
+  const qInput = document.getElementById("qInput");
+  const feedback = document.getElementById("feedback");
+  const startRun = document.getElementById("startRun");
+  const submitBtn = document.getElementById("submitBtn");
+  const toggleTimer = document.getElementById("toggleTimer");
+  const healBtn = document.getElementById("healBtn");
+  const bossBtn = document.getElementById("bossBtn");
+  const bossFeed = document.getElementById("bossFeed");
+
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  function render(){
+    hpNum.textContent = String(state.hp);
+    hpBar.style.width = `${state.hp}%`;
+    streakNum.textContent = String(state.streak);
+    xpNum.textContent = String(state.xp);
+    threatNum.textContent = String(state.threat);
+    healBtn.disabled = !(state.medkits > 0 && state.running && state.hp < 100);
+    bossBtn.disabled = !state.bossUnlocked;
+    submitBtn.disabled = !state.running;
+  }
+
+  // ====== Question bank per lesson ======
+  // You can expand these later. This is the "competitive drill" engine.
+  function makeBank(lesson){
+    // Each item: { q, a } where a is a string compare (trimmed)
+    if (lesson === 2) {
+      return [
+        { q: "Which is louder? 4 or 40. Type: 4 OR 40", a: "40" },
+        { q: "7 moved two places left becomes…", a: "700" },
+        { q: "60 is how many times bigger than 6?", a: "10" },
+        { q: "500 is 5 moved how many places left?", a: "2" }
+      ];
+    }
+    if (lesson === 3) {
+      return [
+        { q: "Write 3,482 in expanded form (use +).", a: "3000+400+80+2" },
+        { q: "Write 90,105 in expanded form (use +).", a: "90000+100+5" },
+        { q: "Expanded form: 700+30+9 equals…", a: "739" },
+        { q: "Expanded form: 6000+200+10+4 equals…", a: "6214" }
+      ];
+    }
+    if (lesson === 4) {
+      return [
+        { q: "Which is greater? 0.6 or 0.58 (type the greater number)", a: "0.6" },
+        { q: "Which is greater? 4,090 or 4,900 (type the greater number)", a: "4900" },
+        { q: "Order from least to greatest: 3.2, 3.02 (type as: 3.02,3.2)", a: "3.02,3.2" },
+        { q: "Is 7,501 > 7,510? Type YES or NO", a: "NO" }
+      ];
+    }
+    if (lesson === 5) {
+      return [
+        { q: "Round 347 to the nearest ten.", a: "350" },
+        { q: "Round 2,651 to the nearest hundred.", a: "2700" },
+        { q: "Round 0.84 to the nearest tenth.", a: "0.8" },
+        { q: "Round 9,949 to the nearest thousand.", a: "10000" }
+      ];
+    }
+    // lesson 6
+    return [
+      { q: "498 × 6 is closer to 3,000 or 30,000? Type 3000 or 30000", a: "3000" },
+      { q: "12,400 ÷ 4 is about… (closest): 3,000 or 30,000? Type 3000 or 30000", a: "3000" },
+      { q: "Estimate 199 + 403 (nearest hundred) → type the estimate", a: "600" },
+      { q: "Estimate 51 × 19 (nearest ten) → type the estimate", a: "1000" }
+    ];
+  }
+
+  const bank = makeBank(LESSON_NUM);
+  let idx = 0;
+
+  function normalize(s){
+    return String(s).trim().replace(/\s+/g,"").toUpperCase();
+  }
+
+  function currentAnswer(){
+    return normalize(bank[idx].a);
+  }
+
+  function ask(){
+    state.round += 1;
+    const q = bank[idx].q;
+    roundLabel.textContent = `Round ${state.round} • Threat ${state.threat}${state.timerOn ? " • ⏱️" : ""}`;
+    qText.textContent = q;
+    qInput.value = "";
+    qInput.focus();
+    feedback.textContent = "—";
+    render();
+  }
+
+  function damage(){
+    // Threat scales damage. Streak gives shield.
+    const base = 12 + (state.threat * 3);
+    const shield = state.streak >= 3 ? 6 : 0;
+    state.hp = clamp(state.hp - (base - shield), 0, 100);
+  }
+
+  function reward(){
+    const speedBonus = state.timerOn ? 5 : 0;
+    const streakBonus = state.streak >= 3 ? 10 : 0;
+    state.xp += 20 + speedBonus + streakBonus;
+    if (state.streak > 0 && state.streak % 3 === 0) {
+      // Every 3 streak: small heal + threat bump
+      state.hp = clamp(state.hp + 6, 0, 100);
+      state.threat = clamp(state.threat + 1, 1, 5);
+    }
+  }
+
+  function lose(){
+    state.running = false;
+    submitBtn.disabled = true;
+    bossBtn.disabled = true;
+    feedback.innerHTML = `<span class="ms-bad">You got wiped.</span> Use Med Kit and restart the run.`;
+    render();
+  }
+
+  function win(){
+    // Unlock boss after a full bank pass
+    state.bossUnlocked = true;
+    feedback.innerHTML = `<span class="ms-good">Run cleared.</span> Boss is unlocked.`;
+    bossBtn.disabled = false;
+    render();
+  }
+
+  function check(){
+    const user = normalize(qInput.value);
+    if (!user) return;
+
+    const correct = user === currentAnswer();
+    if (correct){
+      state.streak += 1;
+      reward();
+      feedback.innerHTML = `<span class="ms-good">Correct.</span> Streak +${state.streak}.`;
+      idx += 1;
+
+      if (idx >= bank.length){
+        win();
+      } else {
+        // Slight ramp if perfect pace
+        if (state.streak % 2 === 0) state.threat = clamp(state.threat + 1, 1, 5);
+        ask();
+      }
+    } else {
+      state.streak = 0;
+      damage();
+      feedback.innerHTML = `<span class="ms-bad">Wrong.</span> HP down. Try again.`;
+      if (state.hp <= 0) lose();
+      render();
+    }
+  }
+
+  // ====== Boss fight = Exit Check ======
+  function boss(){
+    // Boss is simple: one reflection question + a numeric gate
+    const promptA = "Type ONE sentence: why the hack works (keep it short).";
+    const promptB = "Final gate: type 10 (because place value moves are ×10).";
+    bossFeed.textContent = promptA;
+
+    const ans1 = window.prompt(promptA) || "";
+    const ans2 = window.prompt(promptB) || "";
+    if (normalize(ans2) === "10" && ans1.trim().length >= 10){
+      bossFeed.innerHTML = `<span class="ms-good">Boss defeated.</span> Lesson completed + badge earned.`;
+      markLessonComplete();
+    } else {
+      bossFeed.innerHTML = `<span class="ms-bad">Boss survived.</span> Try again.`;
+    }
+  }
+
+  // ====== Completion tracking ======
+  function getDone(){ 
+    try { 
+      const raw = localStorage.getItem(KEY_DONE);
+      const arr = raw ? JSON.parse(raw) : [];
+      return new Set(Array.isArray(arr) ? arr : []);
+    } catch { return new Set(); }
+  }
+  function setDone(set){
+    localStorage.setItem(KEY_DONE, JSON.stringify([...set]));
+  }
+  function markLessonComplete(){
+    const s = getDone();
+    s.add(LESSON_NUM);
+    setDone(s);
+  }
+
+  // ====== Wire up ======
+  startRun.addEventListener("click", () => {
+    state.hp = 100;
+    state.streak = 0;
+    state.xp = 0;
+    state.threat = 1;
+    state.round = 0;
+    state.running = true;
+    state.bossUnlocked = false;
+    idx = 0;
+    ask();
+    submitBtn.disabled = false;
+    render();
+  });
+
+  submitBtn.addEventListener("click", check);
+  qInput.addEventListener("keydown", (e) => { if (e.key === "Enter") check(); });
+
+  toggleTimer.addEventListener("click", () => {
+    state.timerOn = !state.timerOn;
+    toggleTimer.textContent = `Timer: ${state.timerOn ? "ON" : "OFF"}`;
+    render();
+  });
+
+  healBtn.addEventListener("click", () => {
+    if (state.medkits <= 0) return;
+    state.medkits -= 1;
+    state.hp = clamp(state.hp + 25, 0, 100);
+    feedback.innerHTML = `<span class="ms-good">Med Kit used.</span> +25 HP.`;
+    render();
+  });
+
+  bossBtn.addEventListener("click", boss);
+
+  // Initial
+  render();
+})();
+</script>
 </body></html>
